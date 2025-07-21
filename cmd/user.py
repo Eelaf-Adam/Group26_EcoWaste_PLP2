@@ -3,11 +3,31 @@
 #This dictionary stores info of existing accounts
 accounts = {}
 
+from controllers.buyers import buyer_menu
+from controllers.providers import provider_menu
+from controllers.agents import agent_menu
+
 def create_account():
     print("ACCOUNT CREATION")
     user_name = input("Create a user name: ")
     password = input("Create a password: ")
+    print("Select user type: ")
+    print("1. Buyer ")
+    print("2. Provider ")
+    print("3. Agent ")
+
+    role = input("Enter your user type[1-3]: ")
     print(f"Your account {user_name} has been created!")
+
+    user_roles(role)
+
+def user_roles(role):
+        if role == "1":
+            buyer_menu()
+        elif role == "2":
+            provider_menu()
+        elif role == "3":
+            agent_menu()
 
 def existing_account():
     print("ACCOUNT INFO MENU")
@@ -21,7 +41,7 @@ def existing_account():
 
     else:
         print("Unable to access account.")
-        creation_choice = input("Would you like to create an account? [y/n]")
+        creation_choice = input("Would you like to create an account? [y/n]: ")
         if creation_choice == "y" or creation_choice == "Y":
             create_account()
         else:
