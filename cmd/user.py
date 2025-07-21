@@ -1,0 +1,45 @@
+#This file contains the input prompts for the user
+
+#This dictionary stores info of existing accounts
+accounts = {}
+
+def create_account():
+    print("ACCOUNT CREATION")
+    user_name = input("Create a user name: ")
+    password = input("Create a password: ")
+    print(f"Your account {user_name} has been created!")
+
+def existing_account():
+    print("ACCOUNT INFO MENU")
+    user_name = input("Enter your user name: ")
+    if user_name in accounts:
+        password = input("Enter your password: ")
+        if accounts[user_name] == password:
+            print(f"Welcome back {user_name}!")
+        else:
+            print("Incorrect password.")
+
+    else:
+        print("Unable to access account.")
+        creation_choice = input("Would you like to create an account? [y/n]")
+        if creation_choice == "y" or creation_choice == "Y":
+            create_account()
+        else:
+            print("Exiting program...")
+
+def user_prompts():
+    print("1. Create new account: ")
+    print("2. Existing accoung: ")
+    print("3. Exit")
+    user_account = input("Enter your selection[1-3]: ")
+
+    if user_account == "1":
+        create_account()
+    elif user_account == "2":
+        existing_account()
+    elif user_account == "3":
+        print("Exiting program...")
+    else:
+        print("Invalid selection. Please try again")
+
+user_prompts()
