@@ -1,0 +1,21 @@
+import sqlite3
+
+def initialize_databases():
+    """Initializes the database with all required tables"""
+    conn = sqlite3.connect("eco_waste.db")
+    cursor = conn.cursor()
+
+    cursor.execute("""
+    CREATE TABLE IF NOT EXISTS purchases(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    buyer_name TEXT NOT NULL,
+    category TEXT NOT NULL,
+    item TEXT NOT NULL,
+    quantity REAL NOT NULL,
+    timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
+    )
+    """)
+
+    conn.commit()
+    conn.close()
+    print("Database initialized successfully")
