@@ -41,7 +41,7 @@ def user_purchase(user_name):
     }
 
     print("")
-    print("PURCHASE MENU")
+    print("Choose waste category:")
     print("1. Organic ")
     print("2. Inorganic ")
 

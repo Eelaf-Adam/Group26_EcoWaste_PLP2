@@ -24,6 +24,17 @@ CREATE TABLE IF NOT EXISTS purchases(
 )
 """)
 
+    cursor.execute("""
+CREATE TABLE IF NOT EXISTS provider_listings(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    provider_name TEXT,
+    category TEXT,
+    item TEXT,
+    quantity REAL,
+    price_per_kg REAL,
+    timestamp DATETIME DEFAULT CURRENT_TIMESTAMP)
+""")
+
     conn.commit()
     conn.close()
     print("Database initialized successfully")
