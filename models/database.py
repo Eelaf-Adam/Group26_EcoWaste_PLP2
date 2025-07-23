@@ -6,15 +6,22 @@ def initialize_databases():
     cursor = conn.cursor()
 
     cursor.execute("""
-    CREATE TABLE IF NOT EXISTS purchases(
+CREATE TABLE IF NOT EXISTS users(
+    username TEXT UNIQUE NOT NULL,
+    password TEXT NOT NULL
+)
+""")
+
+    cursor.execute("""
+CREATE TABLE IF NOT EXISTS purchases(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     buyer_name TEXT NOT NULL,
     category TEXT NOT NULL,
     item TEXT NOT NULL,
     quantity REAL NOT NULL,
     timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
-    )
-    """)
+)
+""")
 
     conn.commit()
     conn.close()

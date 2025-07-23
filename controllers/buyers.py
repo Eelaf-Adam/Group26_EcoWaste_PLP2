@@ -15,6 +15,14 @@ CREATE TABLE IF NOT EXISTS purchases(
     quantity REAL
 )
 """)
+
+    cursor.execute("""
+CREATE TABLE IF NOT EXISTS users(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    username TEXT UNIQUE NOT NULL,
+    password TEXT NOT NULL
+)
+""")
     conn.commit()
     conn.close()
 
@@ -75,6 +83,22 @@ def user_purchase(user_name):
 Category: {category}
 Item: {selected_item}
 Quantity: {quantity}""")
+
+
+def view_order_history(user_name):
+    conn = sqlite3.connect("eco_waste.db")
+    cursor = conn.cursor()
+
+    cursor.execute("SELECT category, item, quantity FROM purchases WHERE user=?", (user_name,))
+    rows = cursor.fetchall()
+
+    if rows:
+        print(f"Order history for: {user_name}: ")
+        for i, (cat, item, qty) in enumerate(rows, 1):
+            print(f"{i}. {cat} - {item} - {qty} kg")
+    else:
+        print("No order history found.")
+    conn.close()
 
 def buyer_menu():
     user_name = input("Enter your username: ")
