@@ -19,6 +19,7 @@ CREATE TABLE IF NOT EXISTS purchases(
     category TEXT NOT NULL,
     item TEXT NOT NULL,
     quantity REAL NOT NULL,
+    total_cost REAL NOT NULL,
     timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
 )
 """)

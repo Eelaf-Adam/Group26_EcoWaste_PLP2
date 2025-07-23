@@ -31,6 +31,16 @@ def user_purchase(user_name):
     conn = sqlite3.connect("eco_waste.db")
     cursor = conn.cursor()
 
+    PRICE_PER_KG = {
+        "Food waste": 200,
+        "Animal waste": 150,
+        "Yard waste": 100,
+        "Plastic waste": 300,
+        "Metal waste": 450,
+        "Glass waste": 250,
+    }
+
+    print("")
     print("PURCHASE MENU")
     print("1. Organic ")
     print("2. Inorganic ")
@@ -50,9 +60,10 @@ def user_purchase(user_name):
         conn.close()
         return
 
+    print("")
     print(category.upper() + " ITEMS AVALIABLE:")
     for i, items in enumerate(items_list, 1):
-        print(f"{i}. {items}")
+        print(f"{i}. {items} - Price per kg: {PRICE_PER_KG[items]} UGX")
 
     item_input = input("Enter item [1-3]: ")
     quantity = input("Enter quantity(kg): ")
@@ -72,37 +83,52 @@ def user_purchase(user_name):
         conn.close()
         return
 
+    total_cost = PRICE_PER_KG[selected_item] * quantity
+
     cursor.execute("""
-        INSERT INTO purchases(buyer_name, category, item, quantity)
-        VALUES (?,?,?,?)
-""", (user_name, category, selected_item, quantity))
+        INSERT INTO purchases(buyer_name, category, item, quantity, total_cost)
+        VALUES (?,?,?,?,?)
+""", (user_name, category, selected_item, quantity, total_cost))
 
     conn.commit()
     conn.close()
-    print(f"""Purchase recorded:
+    print("")
+    print("")
+    print(f"""
+Purchase recorded:
 Category: {category}
 Item: {selected_item}
-Quantity: {quantity}""")
+Quantity: {quantity}
+Total Cost: {total_cost} UGX
+""")
+    print("")
 
 
 def view_order_history(user_name):
     conn = sqlite3.connect("eco_waste.db")
     cursor = conn.cursor()
 
-    cursor.execute("SELECT category, item, quantity FROM purchases WHERE user=?", (user_name,))
+    cursor.execute("SELECT category, item, quantity, total_cost FROM purchases WHERE buyer_name=?", (user_name,))
     rows = cursor.fetchall()
 
     if rows:
+        print("")
+        print("")
         print(f"Order history for: {user_name}: ")
-        for i, (cat, item, qty) in enumerate(rows, 1):
-            print(f"{i}. {cat} - {item} - {qty} kg")
+        for i, (cat, item, qty, price) in enumerate(rows, 1):
+            print(f"{i}. Category: {cat}")
+            print(f"    Item: {item}")
+            print(f"    Quantity: {qty}kg")
+            print(f"    Total cost: {price} UGX\n")
     else:
         print("No order history found.")
     conn.close()
 
-def buyer_menu():
-    user_name = input("Enter your username: ")
+def buyer_menu(user_name):
+    #user_name = input("Enter your username: ")
     while True:
+        print("")
+        print("")
         print("Welcome Buyer! ")
         print("1. Make a purchase. ")
         print("2. View order history. ")
@@ -112,7 +138,7 @@ def buyer_menu():
         if buyer_decision == "1":
             user_purchase(user_name)
         elif buyer_decision == "2":
-            pass
+            view_order_history(user_name)
         elif buyer_decision == "3":
             print("Exiting...")
             break

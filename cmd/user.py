@@ -9,9 +9,12 @@ def create_account():
     conn = sqlite3.connect("eco_waste.db")
     cursor = conn.cursor()
 
+    print("")
     print("ACCOUNT CREATION")
+    print("")
     user_name = input("Create a user name: ").strip()
     password = input("Create a password: ").strip()
+    print("")
 
     cursor.execute("SELECT * FROM users WHERE username=?", (user_name,))
     if cursor.fetchone():
@@ -28,11 +31,12 @@ def create_account():
     conn.commit()
     conn.close()
     print(f"Your account {user_name} has been created!")
-
+    print("")
     print("Select user type: ")
     print("1. Buyer ")
     print("2. Provider ")
     print("3. Agent ")
+    print("")
 
     role = input("Enter your user type[1-3]: ")
     if role not in ["1", "2", "3"]:
@@ -43,17 +47,18 @@ def create_account():
 
 def user_roles(role, user_name=None):
         if role == "1":
-            buyer_menu()
+            buyer_menu(user_name)
         elif role == "2":
-            provider_menu()
+            provider_menu(user_name)
         elif role == "3":
-            agent_menu()
+            agent_menu(user_name)
 
 def existing_account():
 
     conn = sqlite3.connect("eco_waste.db")
     cursor = conn.cursor()
 
+    print("")
     print("ACCOUNT INFO MENU")
     user_name = input("Enter your user name: ").strip()
     cursor.execute("SELECT password FROM users WHERE username=?", (user_name,))
@@ -64,18 +69,18 @@ def existing_account():
         password = input("Enter your password: ").strip()
 
         if password == stored_password:
+            print("")
             print(f"Welcome back {user_name}!")
+            print("")
             print("Select your role: ")
             print("1. Buyer")
             print("2. Provider")
             print("3. Agent")
             role = input("Enter your user type[1-3]: ")
-            user_roles(role,user_name)
 
-            if role not in ["1", "2", "3"]:
-                print("Invalid user type selected.")
+            if role in ["1", "2", "3"]:
+                user_roles(role, user_name)
                 return
-            user_roles(role, user_name)
         else:
             print("Incorrect password.")
 
@@ -91,7 +96,9 @@ def existing_account():
 
 def user_prompts():
     while True:
+        print("")
         print("EcoWaste Management System")
+        print("")
         print("1. Create new account: ")
         print("2. Existing account: ")
         print("3. Exit")
