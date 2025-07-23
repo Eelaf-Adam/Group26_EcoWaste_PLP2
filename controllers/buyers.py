@@ -33,11 +33,11 @@ def user_purchase(user_name):
 
     PRICE_PER_KG = {
         "Food waste": 200,
-        "Animal waste": 150,
+        "Animal waste": 250,
         "Yard waste": 100,
-        "Plastic waste": 300,
-        "Metal waste": 450,
-        "Glass waste": 250,
+        "Plastic waste": 500,
+        "Metal waste": 2000,
+        "Glass waste": 300,
     }
 
     print("")
