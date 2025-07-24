@@ -27,11 +27,12 @@ class AuthSystem:
         user=self.user[email]
         password=input("Enter your password: ").strip()
         if password == user.password:
-            print("Login is successful")
+            print("Login successful")
             user.home()
+            return user
         else:
             print("Incorrect password. Please try again.")
-
+            return None
     
     def signup(self,email):
         print("\n No account found. Let's create one.")
@@ -74,12 +75,10 @@ class AuthSystem:
 
         else:
             print("Invalid selection. Signup aborted.")
-            return
+            return None
         
         self.user[email] = user 
         print("Account created successfuly")
         user.home()
+        return user
 
-if __name__ == "__main__":
-    app = AuthSystem()
-    app.start()
