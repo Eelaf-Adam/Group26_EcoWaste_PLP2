@@ -1,1 +1,19 @@
-This is the readme file for the PLP2 project
+# EcoWate 
+
+# Featuers 
+
+
+# Technologies used 
+
+
+# Instulation 
+
+
+# Usage 
+
+
+# Project Strcture 
+
+# Interacting with the application 
+
+# DataBase setup 
