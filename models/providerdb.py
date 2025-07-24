@@ -22,3 +22,28 @@ def get_provider_listings(provider_name):
     rows = cursor.fetchall()
     conn.close()
     return rows
+
+def get_all_provider_listings():
+    conn = sqlite3.connect("eco_waste.db")
+    cursor = conn.cursor()
+    cursor.execute("""
+    SELECT provider_name, category, item, quantity, price_per_kg, timestamp
+    FROM provider_listings
+    ORDER BY timestamp DESC
+    """)
+
+    listings = cursor.fetchall()
+    conn.close()
+    return listings
+
+def get_all_purchases():
+    conn = sqlite3.connect("eco_waste.db")
+    cursor = conn.cursor()
+    cursor.execute("""
+        SELECT buyer_name, category, item, quantity, total_cost, timestamp
+        FROM purchases
+        """)
+
+    purchases = cursor.fetchall()
+    conn.close()
+    return purchases

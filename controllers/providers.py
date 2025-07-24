@@ -4,7 +4,7 @@ from models.providerdb import add_listings, get_provider_listings
 def provider_menu(provider_name):
     while True:
         print("")
-        print("Welcome Provider!")
+        print(f"Welcome Provider! {provider_name}")
         print("1. List an item(s). ")
         print("2. View cart. ")
         print("3. Exit. ")

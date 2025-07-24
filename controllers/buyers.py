@@ -129,7 +129,7 @@ def buyer_menu(user_name):
     while True:
         print("")
         print("")
-        print("Welcome Buyer! ")
+        print(f"Welcome Buyer! {user_name} ")
         print("1. Make a purchase. ")
         print("2. View order history. ")
         print("3. Exit. ")
