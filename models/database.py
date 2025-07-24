@@ -32,6 +32,7 @@ CREATE TABLE IF NOT EXISTS provider_listings(
     item TEXT,
     quantity REAL,
     price_per_kg REAL,
+    status TEXT DEFAULT 'available',
     timestamp DATETIME DEFAULT CURRENT_TIMESTAMP)
 """)
 

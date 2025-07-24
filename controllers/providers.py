@@ -14,7 +14,6 @@ def provider_menu(provider_name):
             list_items(provider_name)
         elif provider_decision == "2":
             view_cart(provider_name)
-            pass
         elif provider_decision == "3":
             print("Exiting...")
             break
@@ -24,10 +23,12 @@ def provider_menu(provider_name):
 def list_items(provider_name):
 
     print("")
-    print("Choose waste category: ")
+    print("WASTE CATEGORIES")
     print("1. Organic ")
     print("2. Inorganic ")
     category = input("Enter a waste category: ")
+    print("")
+    print("WASTE TYPES AVALIABLE")
 
     if category == "1":
         category = "Organic"
@@ -46,6 +47,12 @@ def list_items(provider_name):
         selected_item = items[item_choice - 1]
         quantity = float(input("Enter quantity (kg): "))
         price = float(input("Enter price per kg (UGX): "))
+        if price > 3000:
+            print("Price per kg cannot exceed 3000 UGX")
+            return
+        elif quantity > 100 or quantity < 0:
+            print("Quantity must be greater than 0")
+            return
 
         add_listings(provider_name, category, selected_item, quantity, price)
 
@@ -58,8 +65,6 @@ def list_items(provider_name):
         return
 
 def view_cart(provider_name):
-    #conn = sqlite3.connect("eco_waste.db")
-    #cursor = conn.cursor()
     listings = get_provider_listings(provider_name)
 
     if listings:

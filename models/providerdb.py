@@ -16,7 +16,7 @@ def get_provider_listings(provider_name):
     cursor.execute("""
     SELECT category, item, quantity, price_per_kg, timestamp
     FROM provider_listings
-    WHERE provider_name = ?
+    WHERE provider_name = ? AND status = 'available'
     """, (provider_name,))
 
     rows = cursor.fetchall()
@@ -29,7 +29,7 @@ def get_all_provider_listings():
     cursor.execute("""
     SELECT provider_name, category, item, quantity, price_per_kg, timestamp
     FROM provider_listings
-    ORDER BY timestamp DESC
+    WHERE status = 'available'
     """)
 
     listings = cursor.fetchall()
@@ -47,3 +47,14 @@ def get_all_purchases():
     purchases = cursor.fetchall()
     conn.close()
     return purchases
+
+def mark_listings_claimed(provider, item, timestamp):
+    conn = sqlite3.connect("eco_waste.db")
+    cursor = conn.cursor()
+    cursor.execute("""
+        UPDATE provider_listings
+        SET status = 'claimed'
+        WHERE provider_name = ? AND item = ? AND timestamp = ?
+        """, (provider, item, timestamp))
+    conn.commit()
+    conn.close()
