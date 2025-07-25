@@ -5,6 +5,7 @@ from controllers.provider_home import ProviderMenu
 
 class EcoWasteApp:
     def __init__(self):
+        print("Initializing EcoWasteApp")
         self.auth = AuthSystem()
         self.user = None
 

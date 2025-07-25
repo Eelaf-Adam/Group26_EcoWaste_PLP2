@@ -1,4 +1,7 @@
-class User:
+from models.database import SessionLocal
+from models.user import User
+
+"""class User(Base):
     def __init__(self, email, password, role, **info):
         self.email = email
         self.password = password
@@ -6,34 +9,43 @@ class User:
         self.info = info
 
     def home(self):
-        print(f"\n Welcome to the {self.role.capitalize()} Home Page!")
+        print(f"\n Welcome to the {self.role.capitalize()} Home Page!")"""
+
 
 
 class AuthSystem:
     def __init__(self):
-        self.user = {}
+        self.db = SessionLocal()
 
     def start(self):
         print("")
+        print("AuthSystem.start() called")
+        print("Prompting for email...")
+
         print("Welcome to the EcoWaste CLI App")
         email = input("Enter your email: ").strip()
 
-        if self.user_exsits(email):
+        if self.user_exists(email):
             return self.login(email)
         else:
             return self.signup(email)
 
 
-    def user_exsits(self, email):
-        return email in self.user
+    def user_exists(self, email):
+        return self.db.query(User).filter(User.email == email).first() is not None
 
 
     def login(self, email):
-        user = self.user[email]
+        user = self.db.query(User).filter(User.email == email).first()
+
+        if not user:
+            print("No user found with that email.")
+            return None
+
         password = input("Enter your password: ").strip()
 
         if password == user.password:
-            print("Login successful")
+            print("Login successful.")
             user.home()
             return user
         else:
@@ -86,7 +98,10 @@ class AuthSystem:
             print("Invalid selection. Signup aborted.")
             return None
 
-        self.user[email] = user
+        self.db.add(user)
+        self.db.commit()
+        self.db.refresh(user)
+
         print("Account created successfuly")
         user.home()
         return user
