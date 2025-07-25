@@ -1,6 +1,6 @@
 class ProviderMenu:
-    def __hash__(self):
-        self.user = user 
+    def __init__(self, user):
+        self.user = user
 
     def show(self):
         while True:
@@ -13,7 +13,7 @@ class ProviderMenu:
             choice = input("Enter your choice: ").strip()
 
             if choice == "1":
-                self.add_wate()
+                self.add_waste()
             elif choice == "2":
                 self.view_listings()
             elif choice == "3":
@@ -28,5 +28,3 @@ class ProviderMenu:
 
     def view_listings(self):
         print(" (Placeholder) Viewing your listings...")
-
-    

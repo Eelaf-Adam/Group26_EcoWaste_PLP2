@@ -1,6 +1,6 @@
 class BuyerMenu:
     def __init__(self, user):
-        self.user = user 
+        self.user = user
 
     def show(self):
         while True:
@@ -9,7 +9,7 @@ class BuyerMenu:
             print("2.View purchase history")
             print("3. Logout")
 
-            choice = input("Enter your choice:").strip()
+            choice = input("Enter your choice: ").strip()
 
             if choice == "1":
                 self.browse_waste()
@@ -17,14 +17,13 @@ class BuyerMenu:
                 self.view_history()
             elif choice == "3":
                 print("Logging out...")
-                break 
+                break
             else:
                 print("Invalid choice. Please try again.")
 
-    def browse_wate(self):
+    def browse_waste(self):
         print(" (Placeholder) Browsing waste...")
 
-    
+
     def view_history(self):
-        print(" (Placeholder) Viewing purcahce history...")
-        
+        print(" (Placeholder) Viewing purchase history...")
