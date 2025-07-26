@@ -1,3 +1,4 @@
+import models
 from controllers.auth import AuthSystem
 from controllers.buyer_home import BuyerMenu
 from controllers.provider_home import ProviderMenu

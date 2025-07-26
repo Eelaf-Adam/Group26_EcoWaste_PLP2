@@ -1,3 +1,7 @@
+from models.database import SessionLocal
+from models.listings import Listing
+
+
 class BuyerMenu:
     def __init__(self, user):
         self.user = user
@@ -22,7 +26,22 @@ class BuyerMenu:
                 print("Invalid choice. Please try again.")
 
     def browse_waste(self):
-        print("Browsing waste...")
+        db = SessionLocal()
+        listings = db.query(Listing).all()
+
+        if not listings:
+            print("")
+            print("No listings available.")
+            return
+
+        print("*** Available Waste Listings ***")
+
+        for l in listings:
+            print("")
+            print(f"Type: {l.type}")
+            print(f"Category: {l.category}")
+            print(f"Qty: {l.quantity}")
+            print(f"Location: {l.location}")
 
     def view_history(self):
         print("Viewing purchase history...")

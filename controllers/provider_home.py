@@ -1,3 +1,7 @@
+from models.database import SessionLocal
+from models.listings import Listing
+
+
 class ProviderMenu:
     def __init__(self, user):
         self.user = user
@@ -5,7 +9,7 @@ class ProviderMenu:
     def show(self):
         while True:
             print("\n Provider Menu")
-            print("1. Add new wate")
+            print("1. Add new waste")
             print("2. View my listings")
             print("3. Logout")
 
@@ -22,8 +26,8 @@ class ProviderMenu:
                 print("Invalid choice. Please try again.")
 
     def add_waste(self):
-        while True:
-            try:
+        db = SessionLocal()
+        try:
                 print("")
                 print("*** Waste Category ***")
                 print("1. Organic")
@@ -51,19 +55,26 @@ class ProviderMenu:
                     if type_selection in waste_types:
                         print(f"{waste_types[type_selection]} selected ...")
 
-                        qty = float(input("Enter quantity: "))
+                        qty = float(input("Enter quantity (in kg): "))
                         location = input("Enter location: ")
                         print("Order successfully listed!")
 
-                        if location.isalpha():
-                            return {
-                                "Category": "Organic",
-                                "type": waste_types[type_selection],
-                                "quantity": qty,
-                                "location": location
-                            }
-                        else:
-                            print("Invalid entry. Please try again!")
+                        if not location.isalpha():
+                            print("Location must only contain letters.")
+                            return
+
+                        new_listing = Listing(
+                            provider_id = self.user.id,
+                            category = "Organic",
+                            type = waste_types[type_selection],
+                            quantity = qty,
+                            location = location
+                        )
+                        db.add(new_listing)
+                        db.commit()
+
+                        print("Listing successfully added!")
+                        return
 
                     else:
                         print("Invalid waste type. Please try again!")
@@ -90,26 +101,48 @@ class ProviderMenu:
                         qty = float(input("Enter quantity (in kg): "))
                         location = input("Enter pickup location: ")
 
-                        if location.isalpha():
-                            return {
-                                "Category": "Inorganic",
-                                "type": waste_types[type_selection],
-                                "quantity": qty,
-                                "location": location
-                            }
-                        else:
-                            print("Invalid entry. Please try again!")
+                        if not location.isalpha():
+                            print("Location must only contain letters.")
+                            return
 
-                    elif waste_category == 3:
-                        print("Exiting...")
+                        new_listing = Listing(
+                            provider_id = self.user.id,
+                            category = "Inorganic",
+                            type = waste_types[type_selection],
+                            quantity = qty,
+                            location = location
+                        )
+                        db.add(new_listing)
+                        db.commit()
+
+                        print("Listing successfully added!")
                         return
 
-                    else:
-                        print("Invalid entry. Please try again!")
+                elif waste_category == 3:
+                    print("Exiting...")
+                    return
+
+                else:
+                    print("Invalid entry. Please try again!")
 
 
-            except ValueError:
-                print("Invalid choice. Please try again!")
+        except ValueError:
+            print("Invalid choice. Please try again!")
 
     def view_listings(self):
-        print(" (Placeholder) Viewing your listings...")
+        db = SessionLocal()
+        listings = db.query(Listing).filter(Listing.provider_id == self.user.id).all()
+
+        if not listings:
+            print("")
+            print("No listings found.")
+            return
+
+        for l in listings:
+            print("")
+            print("Your listings.")
+            print(f"Type: {l.type}")
+            print(f"Category: {l.category}")
+            print(f"Qty: {l.quantity}")
+            print(f"Location: {l.location}")
+        db.close()

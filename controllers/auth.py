@@ -19,8 +19,6 @@ class AuthSystem:
 
     def start(self):
         print("")
-        print("AuthSystem.start() called")
-        print("Prompting for email...")
 
         print("Welcome to the EcoWaste CLI App")
         email = input("Enter your email: ").strip()

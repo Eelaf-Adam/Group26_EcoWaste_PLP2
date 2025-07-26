@@ -1,5 +1,5 @@
 from models.database import Base, engine
-from models.user import User
+import models
 
 Base.metadata.create_all(bind=engine)
 

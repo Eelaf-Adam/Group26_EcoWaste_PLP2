@@ -1,5 +1,6 @@
 from sqlalchemy import Column, Integer, String
 from models.database import Base
+from sqlalchemy.orm import relationship
 
 class User(Base):
     __tablename__ = 'users'
@@ -14,6 +15,9 @@ class User(Base):
 
     location = Column(String(100), nullable=True)
     name = Column(String(100), nullable=True)
+
+    listings = relationship("Listing", back_populates="provider")
+    purchases = relationship("Purchase", back_populates="buyer")
 
     def __repr__(self):
         return f"<User(email='{self.email}', role='{self.role}')>"
