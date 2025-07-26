@@ -1,3 +1,4 @@
+import re
 from models.database import SessionLocal
 from models.listings import Listing
 
@@ -59,7 +60,7 @@ class ProviderMenu:
                         location = input("Enter location: ")
                         print("Order successfully listed!")
 
-                        if not location.isalpha():
+                        if not re.match(r"^[a-zA-Z\s-]+$", location):
                             print("Location must only contain letters.")
                             return
 
@@ -143,6 +144,6 @@ class ProviderMenu:
             print("Your listings.")
             print(f"Type: {l.type}")
             print(f"Category: {l.category}")
-            print(f"Qty: {l.quantity}")
+            print(f"Qty: {l.quantity} kg")
             print(f"Location: {l.location}")
         db.close()
