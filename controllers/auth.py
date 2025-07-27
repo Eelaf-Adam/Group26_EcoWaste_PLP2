@@ -72,10 +72,10 @@ class AuthSystem:
         
         print(" No account found. Let's create one.")
         print("")
-        print("Are you signing up as:")
+        print("Are you signing up as? ")
         print("1. Buyer")
         print("2. Provider")
-        choice = input("Enter 1 or 2: ").strip()
+        choice = input("Enter [1-2]: ").strip()
 
         if choice == "1":
             role = "Buyer"

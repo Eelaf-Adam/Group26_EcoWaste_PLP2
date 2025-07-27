@@ -6,7 +6,7 @@ class BuyerMenu:
         while True:
             print("\n Buyer Menu")
             print("1. Browse available waste")
-            print("2.View purchase history")
+            print("2. View purchase history")
             print("3. Logout")
 
             choice = input("Enter your choice: ").strip()
@@ -22,8 +22,7 @@ class BuyerMenu:
                 print("Invalid choice. Please try again.")
 
     def browse_waste(self):
-        print(" (Placeholder) Browsing waste...")
-
+        print("Browsing waste...")
 
     def view_history(self):
-        print(" (Placeholder) Viewing purchase history...")
+        print("Viewing purchase history...")

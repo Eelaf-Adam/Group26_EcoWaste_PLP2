@@ -2,6 +2,31 @@ from controllers.auth import AuthSystem
 from controllers.buyer_home import BuyerMenu
 from controllers.provider_home import ProviderMenu
 
+import shutil 
+
+def logo_and_slagon ():
+    ascii_art = r"""
+
+    _____       __        __        _       
+    | ____|___ __\ \      / /_ _ ___| |_ ___ 
+    |  _| / __/ _ \ \ /\ / / _` / __| __/ _ \
+    | |__| (_| (_) \ V  V / (_| \__ \ ||  __/
+    |_____\___\___/ \_/\_/ \__,_|___/\__\___|
+        
+
+
+            ♻️ Your Top Choice Recycling App ♻️
+        "Fighting Climate Change, One Action at a Time."
+    """
+    # Get terminal width 
+    terminal_width = shutil.get_terminal_size().columns 
+
+    # Print each line centered 
+    for line in ascii_art.strip("\n").split("\n"):
+        print(line.center(terminal_width))
+
+# Calling 
+logo_and_slagon()
 
 class EcoWasteApp:
     def __init__(self):
