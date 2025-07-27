@@ -1,3 +1,4 @@
+from utils.security import hash_password, verify_password
 from models.database import SessionLocal
 from models.user import User
 
@@ -23,6 +24,7 @@ class AuthSystem:
             return self.signup(email)
 
 
+
     #Function checks if the user account is existing or not
     def user_exists(self, email):
         return self.db.query(User).filter(User.email == email).first() is not None
@@ -38,12 +40,13 @@ class AuthSystem:
 
         password = input("Enter your password: ").strip()
 
-        if password == user.password:
+
+        if verify_password(password, user.password):
             print("Login successful.")
             user.home()
             return user
         else:
-            print("Incorrect password. Please try again.")
+            print("Incorrect password. Please try again")
             return None
 
 
@@ -68,11 +71,12 @@ class AuthSystem:
             location = input("Location: ").strip()
             company_domain = input("Company Domain: ").strip()
             password = input("Create password: ").strip()
+            hashed_password = hash_password(password)
 
 
             user = User(
                 email = email,
-                password = password,
+                password = hashed_password,
                 role= role,
                 company_name = company_name,
                 location = location,
@@ -85,11 +89,12 @@ class AuthSystem:
             name = input("Your Name: ").strip()
             location = input("Location: ").strip()
             password = input("Create password: ").strip()
+            hashed_password = hash_password(password)
 
 
             user = User(
                 email = email,
-                password = password,
+                password = hashed_password,
                 role = role,
                 name = name,
                 location = location
