@@ -10,6 +10,13 @@ class BuyerMenu:
 
     def show(self):
         while True:
+
+            """
+            This function displays the buyer menu
+            when called upon and prompts user to
+            select next action
+            """
+
             print("\n Buyer Menu")
             print("1. Browse available waste")
             print("2. View purchase history")
@@ -28,8 +35,17 @@ class BuyerMenu:
                 print("Invalid choice. Please try again.")
 
     def browse_waste(self):
+
+        """
+        This function interacts with the database
+        to display available waste listed by the
+        providers
+        """
+
+        #Accessing the database
         db = SessionLocal()
         try:
+            #Accessing the listings table in the database
             listings = db.query(Listing).filter(Listing.quantity > 0).all()
 
             if not listings:
@@ -39,6 +55,7 @@ class BuyerMenu:
 
             print("*** Available Waste Listings ***")
 
+            #Displays the available providers
             for idx, l in enumerate(listings, start=1):
                 print("")
                 print(f"{idx}. Type: {l.type}")
@@ -53,12 +70,14 @@ class BuyerMenu:
             db.close()
 
             try:
+                #Prompt for the user to either select a buyer or exit the menu
                 selected = int(input("Enter number of listing to purchase (0 to cancel): "))
 
                 if selected == 0:
                     print("Cancelled.")
                     return
 
+                #Removes waste selected from avaliable waste
                 listing = listings[selected - 1]
 
                 if listing.provider_id == self.user.id:
@@ -98,14 +117,23 @@ class BuyerMenu:
 
 
     def view_history(self):
+
+        """
+        This function allows the buyers to view
+        their previous transactions
+        """
+
         db = SessionLocal()
         try:
+            #Accessing the purchases table in the database
             purchases = db.query(Purchase).filter(Purchase.buyer_id == self.user.id).all()
 
             if not purchases:
                 print("You have no past purchases.")
                 return
 
+            #Displaying previous purchases
+            print("")
             print("*** Your Purchase History ***")
             for p in purchases:
                 listing = db.query(Listing).get(p.listing_id)

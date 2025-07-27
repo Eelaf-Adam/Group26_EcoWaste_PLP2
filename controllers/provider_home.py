@@ -8,6 +8,13 @@ class ProviderMenu:
         self.user = user
 
     def show(self):
+
+        """
+         This function displays the provider menu
+        when called upon and prompts user to
+        select next action
+        """
+
         while True:
             print("\n Provider Menu")
             print("1. Add new waste")
@@ -27,6 +34,14 @@ class ProviderMenu:
                 print("Invalid choice. Please try again.")
 
     def add_waste(self):
+
+        """
+        This function displays the waste categories
+        once user selects add new waste and corresponding
+        prompts to input desired quantity and pickup location
+        """
+
+        #Connects to the database to save information entered by user
         db = SessionLocal()
         try:
                 print("")
@@ -60,9 +75,11 @@ class ProviderMenu:
                         location = input("Enter location: ")
                         print("Order successfully listed!")
 
+                        #Error handling for invalid location
                         if not re.match(r"^[a-zA-Z\s-]+$", location):
                             print("Location must only contain letters.")
                             return
+
 
                         new_listing = Listing(
                             provider_id = self.user.id,
@@ -102,7 +119,7 @@ class ProviderMenu:
                         qty = float(input("Enter quantity (in kg): "))
                         location = input("Enter pickup location: ")
 
-                        if not location.isalpha():
+                        if not re.match(r"^[a-zA-Z\s-]+$", location):
                             print("Location must only contain letters.")
                             return
 
@@ -131,6 +148,14 @@ class ProviderMenu:
             print("Invalid choice. Please try again!")
 
     def view_listings(self):
+
+        """
+        This function displays previous order history
+        of the user stored in the database when called
+        upon
+        """
+
+        #Accessing the database
         db = SessionLocal()
         listings = db.query(Listing).filter(Listing.provider_id == self.user.id).all()
 

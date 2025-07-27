@@ -5,6 +5,12 @@ from datetime import datetime
 from sqlalchemy import Float
 
 class Purchase(Base):
+
+    """
+    This class contains the specifications for the
+    purchases table in the database
+    """
+    
     __tablename__ = "purchases"
 
     id = Column(Integer, primary_key=True)

@@ -1,23 +1,17 @@
 from models.database import SessionLocal
 from models.user import User
 
-"""class User(Base):
-    def __init__(self, email, password, role, **info):
-        self.email = email
-        self.password = password
-        self.role = role
-        self.info = info
-
-    def home(self):
-        print(f"\n Welcome to the {self.role.capitalize()} Home Page!")"""
-
-
-
 class AuthSystem:
+
+    #Connects the user information to the database
     def __init__(self):
         self.db = SessionLocal()
 
     def start(self):
+        """
+        Function prompts the user for email information and
+        syncs it to the database
+        """
         print("")
 
         print("Welcome to the EcoWaste CLI App")
@@ -29,10 +23,12 @@ class AuthSystem:
             return self.signup(email)
 
 
+    #Function checks if the user account is existing or not
     def user_exists(self, email):
         return self.db.query(User).filter(User.email == email).first() is not None
 
 
+    #Function ensures the username and password match before proceeding
     def login(self, email):
         user = self.db.query(User).filter(User.email == email).first()
 
@@ -50,7 +46,14 @@ class AuthSystem:
             print("Incorrect password. Please try again.")
             return None
 
+
     def signup(self,email):
+
+        """
+        Function prompts the user to select their user type
+        and enter the respective corresponding information
+        """
+
         print(" No account found. Let's create one.")
         print("")
         print("Are you signing up as? ")

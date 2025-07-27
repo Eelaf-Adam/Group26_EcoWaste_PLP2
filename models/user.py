@@ -3,6 +3,12 @@ from models.database import Base
 from sqlalchemy.orm import relationship
 
 class User(Base):
+
+    """
+    This class contains the specifications
+    for the user table in the database
+    """
+
     __tablename__ = 'users'
 
     id = Column(Integer, primary_key=True, index=True)

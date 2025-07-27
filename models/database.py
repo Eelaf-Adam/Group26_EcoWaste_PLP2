@@ -1,3 +1,5 @@
+#This file contains the logic to connect to the database
+
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, declarative_base
 from dotenv import load_dotenv

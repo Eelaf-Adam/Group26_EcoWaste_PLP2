@@ -3,6 +3,12 @@ from sqlalchemy import Column, Integer, String, Float, ForeignKey
 from sqlalchemy.orm import relationship
 
 class Listing(Base):
+
+    """
+    This class contains the specifications
+    for the listing table in the database
+    """
+    
     __tablename__ = "listings"
 
     id = Column(Integer, primary_key=True)
