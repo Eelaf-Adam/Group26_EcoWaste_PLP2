@@ -6,7 +6,7 @@ from controllers.provider_home import ProviderMenu
 import shutil
 
 #Logo to enhance User experience
-def logo_and_slagon ():
+def logo_and_slogan ():
     ascii_art = r"""
 
     _____       __        __        _
@@ -28,7 +28,7 @@ def logo_and_slagon ():
         print(line.center(terminal_width))
 
 # Calling
-logo_and_slagon()
+logo_and_slogan()
 
 class EcoWasteApp:
 
