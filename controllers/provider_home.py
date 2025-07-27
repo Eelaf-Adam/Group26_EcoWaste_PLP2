@@ -1,6 +1,9 @@
+# This files provides the logic for the provider menue featuers 
+
 class ProviderMenu:
     def __init__(self, user):
         self.user = user
+        self.listing = [] # For listing storage (to keep track of what the provider has listed)
 
     def show(self):
         while True:
@@ -12,14 +15,17 @@ class ProviderMenu:
             choice = input("Enter your choice: ").strip()
 
             if choice == "1":
-                self.add_waste()
+               listing = self.add_waste()
+               if listing:
+                   self.listing.append(listing)
+                   print("Waste successfully listed")
             elif choice == "2":
                 self.view_listings()
             elif choice == "3":
                 print("Logging out..")
                 break
             else:
-                print("Invalid choice. Please try again.")
+                print("Invalid choice. Please enter 1,2, or 3.")
 
     def add_waste(self):
         while True:
@@ -31,85 +37,69 @@ class ProviderMenu:
                 print("3. Exit to main menu")
 
                 waste_category = int(input("Enter waste category [1-3]: "))
+                if not waste_category.isdigit() or int(waste_category) not in [1, 2, 3]:
+                    print(" Invalid input. Please enter 1, 2, or 3.")
+                    continue
 
-                if waste_category == 1:
-                    print("Organic waste selected....")
-                    print("")
-                    print("*** Waste Type ***")
-                    print("1. Food waste")
-                    print("2. Animal waste")
-                    print("3. Yard waste")
+                waste_category = int(waste_category)
 
-                    type_selection = int(input("Enter choice [1-3]: "))
+                if waste_category == 3:
+                    print(" Returing to main menu...")
+                    return None 
+                
+                category_name = "Organic" if waste_category == 1 else "Inorganic"
 
-                    waste_types = {
-                        1: "Food waste",
-                        2: "Animal waste",
-                        3: "Yard waste"
-                    }
+                wate_types = {
+                    1: "Food waste" if waste_category == 1 else "Plastic waste",
+                    2: "Animal wate" if waste_category == 1 else "Metal Waste",
+                    3: "Yard waste" if waste_category == 1 else "Glass waste"
+                }
 
-                    if type_selection in waste_types:
-                        print(f"{waste_types[type_selection]} selected ...")
+                print(f"\n {category_name} Waste Types:")
+                for key, value in waste_types.items():
+                    print(f"{key}. {value}")
 
-                        qty = float(input("Enter quantity: "))
-                        location = input("Enter location: ")
-                        print("Order successfully listed!")
+                type_selection = input("Enter waste type [1-3]:").strip()
+                if not type_selection.isdigit() or int(type_selection) not in waste_types:
+                    print("Invalid type selection. Try again.")
+                    continue
 
-                        if location.isalpha():
-                            return {
-                                "Category": "Organic",
-                                "type": waste_types[type_selection],
-                                "quantity": qty,
-                                "location": location
-                            }
-                        else:
-                            print("Invalid entry. Please try again!")
+                selected_type = waste_types[int(type_selection)]
 
-                    else:
-                        print("Invalid waste type. Please try again!")
+                # Quantity 
+                qty_input = input("Enter quantity (in kg):").strip()
+                try:
+                    qty = float(qty_input)
+                    if qty <= 0:
+                        print("Quantity must be positive.")
+                        continue
+                except ValueError:
+                    print("Quantity must be a valid number.")
+                    continue
 
-                elif waste_category == 2:
-                    print("Inorganic waste selected...")
-                    print("")
-                    print("*** Waste Type ***")
-                    print("1. Plastic waste")
-                    print("2. Metal waste")
-                    print("3. Glass waste")
+                #Location 
+                location = input("Enter pickup location:").strip()
+                if not location.replace("","").isalpha():
+                    print("Location must only contain letters.")
+                    continue
 
-                    type_selection = int(input("Enter waste type [1-3]: "))
+                return{
+                    "Category": category_name,
+                    "Type": selected_type,
+                    "Quantity (kg)": qty,
+                    "Location": location 
+                }
+            
+            except Exception as e:
+                print(f"An unexpected error occurred: {e}")
 
-                    waste_types = {
-                        1: "Plastic waste",
-                        2: "Metal waste",
-                        3: "Glass waste"
-                    }
-
-                    if type_selection in waste_types:
-                        print(f"{waste_types[type_selection]} selected ....")
-
-                        qty = float(input("Enter quantity (in kg): "))
-                        location = input("Enter pickup location: ")
-
-                        if location.isalpha():
-                            return {
-                                "Category": "Inorganic",
-                                "type": waste_types[type_selection],
-                                "quantity": qty,
-                                "location": location
-                            }
-                        else:
-                            print("Invalid entry. Please try again!")
-
-                    elif waste_category == 3:
-                        print("Exiting...")
-                        return
-
-                    else:
-                        print("Invalid entry. Please try again!")
-
-
-            except ValueError:
-                print("Invalid choice. Please try again!")
-
-    def view_listings(self):
-        print(" (Placeholder) Viewing your listings...")
+    def view_listing(self):
+        print("\n Your Waste Listing:")
+        if not self.listing:
+                print("You have not listed any waste yet.")
+                return 
+        
+        for i, listing in enumerate(self.listing, 1):
+                print(f"{i}. {listing['Category']} - {listing['Type']}, {listing['Quantity (kg)']}kg@ {listing['Location']}")
+               
+               
