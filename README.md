@@ -151,7 +151,6 @@ DATABASE_URL=mysql+mysqlconnector://{your_username}:{your_password}@localhost:33
 ``` sh
 python main.py
 ```
-<br></br>
 
 # 👩‍💻 Authors
 - **Leon Nsamba**
