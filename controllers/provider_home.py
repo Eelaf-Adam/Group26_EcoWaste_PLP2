@@ -75,18 +75,18 @@ class ProviderMenu:
                             try:
                                 qty = float(input("Enter quantity (in kg): "))
                                 if qty <= 0:
-                                    print("Quantity must be greater than 0.")
+                                    print("❌ Quantity must be greater than 0.")
                                 else:
                                     break
                             except ValueError:
-                                print("Please enter a valid number.")
+                                print("❌ Please enter a valid number.")
 
                         location = input("Enter location: ")
-                        print("✅ Order successfully listed!")
+                        #print("✅ Order successfully listed!")
 
                         #Error handling for invalid location
                         if not re.match(r"^[a-zA-Z\s-]+$", location):
-                            print("Location must only contain letters.")
+                            print("❌ Location must only contain letters.")
                             return
 
 
@@ -129,7 +129,7 @@ class ProviderMenu:
                             try:
                                 qty = float(input("Enter quantity (in kg): "))
                                 if qty <= 0:
-                                    print("Quantity must be greater than 0.")
+                                    print("❌ Quantity must be greater than 0.")
                                 else:
                                     break
                             except ValueError:
@@ -138,7 +138,7 @@ class ProviderMenu:
                         location = input("Enter pickup location: ")
 
                         if not re.match(r"^[a-zA-Z\s-]+$", location):
-                            print("Location must only contain letters.")
+                            print("❌ Location must only contain letters.")
                             return
 
                         new_listing = Listing(

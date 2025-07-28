@@ -32,7 +32,7 @@ class AuthSystem:
             if len(value) < min_length :
                 print("❌ Invalid entry. Please try again.")
             elif not re.match(pattern, value):
-                print("Input must only contain letters.")
+                print("❌ Input must only contain letters.")
             else:
                 return value
 

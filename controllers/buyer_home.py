@@ -68,7 +68,7 @@ class BuyerMenu:
             print("❌ Invalid input. Try again.")
 
         finally:
-            db.close()
+            db.commit()
 
             try:
                 #Prompt for the user to either select a buyer or exit the menu
@@ -82,7 +82,7 @@ class BuyerMenu:
                 listing = listings[selected - 1]
 
                 if listing.provider_id == self.user.id:
-                    print("You cannot purchase your own listing.")
+                    print("❌ You cannot purchase your own listing.")
                     return
 
                 qty = float(input("Enter quantity to purchase (kg): "))
@@ -92,6 +92,8 @@ class BuyerMenu:
                     return
 
                 listing.quantity -= qty
+                if listing.quantity <=0 :
+                    db.delete(listing)
 
                 purchase = Purchase(
                     buyer_id = self.user.id,
