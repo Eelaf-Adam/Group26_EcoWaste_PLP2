@@ -3,6 +3,7 @@
 EcoWaste is a sustainability-focused menu based application that helps users git rid of their waste at no cost. This CLI app is intended to stimulate a real-world recycling marketplace for educational/demo purposes. By promoting responsible waste management, EcoWaste supports the fight against climate change and promise a better more sustainable planet.
 <br></br>
 
+
 ## 🚀 Features 
 - **User Authentication**: Prompt for users to log in or create an new account.
 - **Provider Menu**: A menu that allows the user to list recyclable waste items they want to get rid of.
@@ -151,14 +152,14 @@ DATABASE_URL=mysql+mysqlconnector://{your_username}:{your_password}@localhost:33
 ``` sh
 python main.py
 ```
-
+---
 # 👩‍💻 Authors
 - **Leon Nsamba**
 - **Eelaf Adam**
 <br></br>
-
+---
 ### 💡Inspiration
-This project was part of the Peer Learning Project Group 26 Summative in ALU. The project tasked us to develop a command-line-based, minimal menu-driven application that is Python-based and uses database technology. The softwarer was designed to address a GCGO (Climate Change) that aligns with the group's mission and interests.
+This project was part of the Peer Learning Project Group 26 Summative at ALU. The project tasked us to develop a command-line-based, minimal menu-driven application that is Python-based and uses database technology. The software was designed to address a GCGO (Climate Change) that aligns with the group's mission and interests.
 <br></br>
 
 
