@@ -10,6 +10,7 @@ class AuthSystem:
         self.db = SessionLocal()
 
     def is_valid_email(self, email):
+        #This verifies if the email is valid
         pattern = r'^[\w\.-]+@[\w\.-]+\.\w+$'
         return re.match(pattern, email) is not None
 
