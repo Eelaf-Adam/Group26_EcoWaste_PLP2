@@ -53,6 +53,7 @@ class BuyerMenu:
                 print("No listings available.")
                 return
 
+            print("")
             print("*** Available Waste Listings ***")
 
             #Displays the available providers

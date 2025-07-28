@@ -1,6 +1,7 @@
 from utils.security import hash_password, verify_password
 from models.database import SessionLocal
 from models.user import User
+import re
 
 class AuthSystem:
 
@@ -8,20 +9,29 @@ class AuthSystem:
     def __init__(self):
         self.db = SessionLocal()
 
+    def is_valid_email(self, email):
+        pattern = r'^[\w\.-]+@[\w\.-]+\.\w+$'
+        return re.match(pattern, email) is not None
+
     def start(self):
-        """
-        Function prompts the user for email information and
-        syncs it to the database
-        """
-        print("")
+        while True:
+            """
+            Function prompts the user for email information and
+            syncs it to the database
+            """
+            print("")
 
-        print("Welcome to the EcoWaste CLI App")
-        email = input("Enter your email: ").strip()
+            print("Welcome to the EcoWaste CLI App")
+            email = input("Enter your email: ").strip()
 
-        if self.user_exists(email):
-            return self.login(email)
-        else:
-            return self.signup(email)
+            if not self.is_valid_email(email):
+                print("Invalid email. Please try again.")
+                continue
+
+            if self.user_exists(email):
+                return self.login(email)
+            else:
+                return self.signup(email)
 
 
 
@@ -39,7 +49,6 @@ class AuthSystem:
             return None
 
         password = input("Enter your password: ").strip()
-
 
         if verify_password(password, user.password):
             print("Login successful.")
