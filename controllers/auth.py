@@ -14,6 +14,28 @@ class AuthSystem:
         pattern = r'^[\w\.-]+@[\w\.-]+\.\w+$'
         return re.match(pattern, email) is not None
 
+    def get_valid_password(self):
+        while True:
+            password = input("Create password (min 8 characters): ").strip()
+
+            if len(password) < 8:
+                print("Password too short. Must be atleast 8 characters")
+            else:
+                return password
+
+    def get_valid_input(self, prompt_text, min_length=4):
+        pattern = r"^[a-zA-Z\s-]+$"
+
+        while True:
+            value = input(prompt_text).strip()
+
+            if len(value) < min_length :
+                print("❌ Invalid entry. Please try again.")
+            elif not re.match(pattern, value):
+                print("Input must only contain letters.")
+            else:
+                return value
+
     def start(self):
         while True:
             """
@@ -26,7 +48,7 @@ class AuthSystem:
             email = input("Enter your email: ").strip()
 
             if not self.is_valid_email(email):
-                print("Invalid email. Please try again.")
+                print("❌ Invalid email. Please try again.")
                 continue
 
             if self.user_exists(email):
@@ -74,13 +96,14 @@ class AuthSystem:
         print("2. Provider")
         choice = input("Enter [1-2]: ").strip()
 
+
         if choice == "1":
             role = "Buyer"
             print("")
-            company_name = input("Comapny Name: ").strip()
-            location = input("Location: ").strip()
-            company_domain = input("Company Domain: ").strip()
-            password = input("Create password: ").strip()
+            company_name = self.get_valid_input("Company Name: ")
+            location = self.get_valid_input("Location: ")
+            company_domain = self.get_valid_input("Company Domain [waste-solutions.org, greenloop.co, ecoinnovators.africa, none]: ")
+            password = self.get_valid_password()
             hashed_password = hash_password(password)
 
 
@@ -96,9 +119,9 @@ class AuthSystem:
         elif choice == "2":
             role = "Provider"
             print("")
-            name = input("Your Name: ").strip()
-            location = input("Location: ").strip()
-            password = input("Create password: ").strip()
+            name = self.get_valid_input("Your Name: ")
+            location = self.get_valid_input("Location: ")
+            password = self.get_valid_password()
             hashed_password = hash_password(password)
 
 
@@ -111,13 +134,13 @@ class AuthSystem:
             )
 
         else:
-            print("Invalid selection. Signup aborted.")
+            print("❌ Invalid selection. Signup aborted.")
             return None
 
         self.db.add(user)
         self.db.commit()
         self.db.refresh(user)
 
-        print("Account created successfuly")
+        print("✅ Account created successfuly")
         user.home()
         return user

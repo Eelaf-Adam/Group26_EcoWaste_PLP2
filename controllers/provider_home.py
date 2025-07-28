@@ -31,7 +31,7 @@ class ProviderMenu:
                 print("Logging out..")
                 break
             else:
-                print("Invalid choice. Please try again.")
+                print("❌ Invalid choice. Please try again.")
 
     def add_waste(self):
 
@@ -71,9 +71,18 @@ class ProviderMenu:
                     if type_selection in waste_types:
                         print(f"{waste_types[type_selection]} selected ...")
 
-                        qty = float(input("Enter quantity (in kg): "))
+                        while True:
+                            try:
+                                qty = float(input("Enter quantity (in kg): "))
+                                if qty <= 0:
+                                    print("Quantity must be greater than 0.")
+                                else:
+                                    break
+                            except ValueError:
+                                print("Please enter a valid number.")
+
                         location = input("Enter location: ")
-                        print("Order successfully listed!")
+                        print("✅ Order successfully listed!")
 
                         #Error handling for invalid location
                         if not re.match(r"^[a-zA-Z\s-]+$", location):
@@ -91,11 +100,11 @@ class ProviderMenu:
                         db.add(new_listing)
                         db.commit()
 
-                        print("Listing successfully added!")
+                        print("✅ Listing successfully added!")
                         return
 
                     else:
-                        print("Invalid waste type. Please try again!")
+                        print("❌ Invalid waste type. Please try again!")
 
                 elif waste_category == 2:
                     print("Inorganic waste selected...")
@@ -116,7 +125,16 @@ class ProviderMenu:
                     if type_selection in waste_types:
                         print(f"{waste_types[type_selection]} selected ....")
 
-                        qty = float(input("Enter quantity (in kg): "))
+                        while True:
+                            try:
+                                qty = float(input("Enter quantity (in kg): "))
+                                if qty <= 0:
+                                    print("Quantity must be greater than 0.")
+                                else:
+                                    break
+                            except ValueError:
+                                print("Please enter a valid number.")
+
                         location = input("Enter pickup location: ")
 
                         if not re.match(r"^[a-zA-Z\s-]+$", location):
@@ -133,7 +151,7 @@ class ProviderMenu:
                         db.add(new_listing)
                         db.commit()
 
-                        print("Listing successfully added!")
+                        print("✅ Listing successfully added!")
                         return
 
                 elif waste_category == 3:
@@ -141,11 +159,11 @@ class ProviderMenu:
                     return
 
                 else:
-                    print("Invalid entry. Please try again!")
+                    print("❌ Invalid entry. Please try again!")
 
 
         except ValueError:
-            print("Invalid choice. Please try again!")
+            print("❌ Invalid choice. Please try again!")
 
     def view_listings(self):
 

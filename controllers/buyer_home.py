@@ -32,7 +32,7 @@ class BuyerMenu:
                 print("Logging out...")
                 break
             else:
-                print("Invalid choice. Please try again.")
+                print("❌ Invalid choice. Please try again.")
 
     def browse_waste(self):
 
@@ -65,7 +65,7 @@ class BuyerMenu:
                 print(f"Location: {l.location}")
 
         except (ValueError, IndexError):
-            print("Invalid input. Try again.")
+            print("❌ Invalid input. Try again.")
 
         finally:
             db.close()
@@ -75,7 +75,7 @@ class BuyerMenu:
                 selected = int(input("Enter number of listing to purchase (0 to cancel): "))
 
                 if selected == 0:
-                    print("Cancelled.")
+                    print("❌ Cancelled.")
                     return
 
                 #Removes waste selected from avaliable waste
@@ -88,7 +88,7 @@ class BuyerMenu:
                 qty = float(input("Enter quantity to purchase (kg): "))
 
                 if qty <= 0 or qty > listing.quantity:
-                    print("Invalid quantity. Must be > 0 and less than available.")
+                    print("❌ Invalid quantity. Must be > 0 and less than available.")
                     return
 
                 listing.quantity -= qty
@@ -106,12 +106,12 @@ class BuyerMenu:
                 confirm = input("Confirm your purchase? (yes/no): ").strip().lower()
 
                 if confirm != "yes":
-                    print("Purchase cancelled.")
+                    print("❌ Purchase cancelled.")
                 else:
-                    print("Purchase successful!")
+                    print("✅ Purchase successful!")
 
             except (ValueError, IndexError):
-                print("Invalid input. Try again.")
+                print("❌ Invalid input. Try again.")
 
             finally:
                 db.close()
