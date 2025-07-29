@@ -32,7 +32,7 @@ ii. Create and activate a virtual environment
  ```sh
       #On windows
       python -m venv .venv
-     .venv\Scripts\activate
+      source .venv\Scripts\activate
 
       #On MacOS/Linux
       python3 -m venv .venv
