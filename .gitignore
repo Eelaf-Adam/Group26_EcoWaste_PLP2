@@ -1,1 +1,9 @@
+<<<<<<< HEAD
 venv
+=======
+.venv
+.vscode
+__pycache__/
+*.pyc
+.env
+>>>>>>> Leon2-branch
