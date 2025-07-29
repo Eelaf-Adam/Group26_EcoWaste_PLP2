@@ -36,6 +36,32 @@ class AuthSystem:
             else:
                 return value
 
+    def prompt_company_domain(self):
+        print("Choose your company domain: ")
+        print("1. waste-solutions")
+        print("2. greenloop")
+        print("3. ecoinnovators.africa")
+        print("4. Other")
+
+        domain_options = {
+            "1": "waste-solutions",
+            "2": "greenloop",
+            "3": "ecoinnovators.africa"
+        }
+        while True:
+            choice = input("Enter your choice [1-4]: ").strip()
+            if choice in domain_options:
+                return domain_options[choice]
+            elif choice == "4":
+                custom = input("Enter your custom domain (e.g cleantech.io): ").strip()
+                if re.match(r'^[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$', custom):
+                    return custom
+                else:
+                    print("❌ Invalid domain format. Try again.")
+
+            else:
+                print("❌ Invalid selection. Please choose 1-4.")
+
     def start(self):
         while True:
             """
@@ -74,7 +100,8 @@ class AuthSystem:
         password = input("Enter your password: ").strip()
 
         if verify_password(password, user.password):
-            print("Login successful.")
+            print("✅ Login successful.")
+            print("")
             user.home()
             return user
         else:
@@ -102,7 +129,8 @@ class AuthSystem:
             print("")
             company_name = self.get_valid_input("Company Name: ")
             location = self.get_valid_input("Location: ")
-            company_domain = self.get_valid_input("Company Domain [waste-solutions.org, greenloop.co, ecoinnovators.africa, none]: ")
+            print("")
+            company_domain = self.prompt_company_domain()
             password = self.get_valid_password()
             hashed_password = hash_password(password)
 

@@ -91,9 +91,13 @@ class BuyerMenu:
                     print("❌ Invalid quantity. Must be > 0 and less than available.")
                     return
 
+                confirm = input("Confirm your purchase? (yes/no): ").strip().lower()
+
+                if confirm != "yes":
+                    print("❌ Purchase cancelled.")
+                    return
+
                 listing.quantity -= qty
-                if listing.quantity <=0 :
-                    db.delete(listing)
 
                 purchase = Purchase(
                     buyer_id = self.user.id,
@@ -105,12 +109,11 @@ class BuyerMenu:
                 db.add(purchase)
                 db.commit()
 
-                confirm = input("Confirm your purchase? (yes/no): ").strip().lower()
+                if listing.quantity == 0:
+                    print("ℹ️  Listing is fully sold out. Contact another provider.")
 
-                if confirm != "yes":
-                    print("❌ Purchase cancelled.")
-                else:
-                    print("✅ Purchase successful!")
+                print("✅ Purchase successfull")
+
 
             except (ValueError, IndexError):
                 print("❌ Invalid input. Try again.")

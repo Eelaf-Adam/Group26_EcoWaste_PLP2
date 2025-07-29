@@ -7,7 +7,22 @@ class ProviderMenu:
     def __init__(self, user):
         self.user = user
 
+    def notify_sold_out(self):
+        db = SessionLocal()
+        sold_out_listings = db.query(Listing).filter(
+            Listing.provider_id == self.user.id,
+            Listing.quantity == 0
+        ).all()
+        db.close()
+
+        if sold_out_listings:
+            print("⚠️  You have sold-out listings! Consider restocking.")
+            for l in sold_out_listings:
+                print(f"- {l.type} at {l.location}")
+
     def show(self):
+
+        self.notify_sold_out()
 
         """
          This function displays the provider menu
@@ -32,6 +47,7 @@ class ProviderMenu:
                 break
             else:
                 print("❌ Invalid choice. Please try again.")
+
 
     def add_waste(self):
 
@@ -189,4 +205,7 @@ class ProviderMenu:
             print(f"Category: {l.category}")
             print(f"Qty: {l.quantity} kg")
             print(f"Location: {l.location}")
+
+            if l.quantity == 0:
+                print("⚠️  This listing is fully sold out!")
         db.close()
