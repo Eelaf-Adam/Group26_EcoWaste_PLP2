@@ -97,16 +97,22 @@ class AuthSystem:
             print("No user found with that email.")
             return None
 
-        password = input("Enter your password: ").strip()
+        attempts = 3
+        while attempts > 0:
+            password = input("Enter your password: ").strip()
 
-        if verify_password(password, user.password):
-            print("✅ Login successful.")
-            print("")
-            user.home()
-            return user
-        else:
-            print("Incorrect password. Please try again")
-            return None
+            if verify_password(password, user.password):
+                print("✅ Login successful.")
+                print("")
+                user.home()
+                return user
+            else:
+                attempts -= 1
+                print(f"❌ Incorrect password. {attempts} attempt(s) remaining.")
+
+
+        print("❌ Too many failed attempts. Login aborted")
+        return None
 
 
     def signup(self,email):

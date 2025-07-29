@@ -110,7 +110,7 @@ class BuyerMenu:
                 db.commit()
 
                 if listing.quantity == 0:
-                    print("ℹ️  Listing is fully sold out. Contact another provider.")
+                    print("ℹ️  Listing is officially sold out.")
 
                 print("✅ Purchase successfull")
 
