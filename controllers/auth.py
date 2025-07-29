@@ -23,7 +23,7 @@ class AuthSystem:
             else:
                 return password
 
-    def get_valid_input(self, prompt_text, min_length=4):
+    def get_valid_input(self, prompt_text, min_length=3):
         pattern = r"^[a-zA-Z\s-]+$"
 
         while True:
