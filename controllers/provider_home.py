@@ -99,7 +99,7 @@ class ProviderMenu:
                             except ValueError:
                                 print("❌ Please enter a valid number.")
 
-                        location = input("Enter location: ")
+                        location = input("Enter pickup location: ")
                         #print("✅ Order successfully listed!")
 
                         #Error handling for invalid location
