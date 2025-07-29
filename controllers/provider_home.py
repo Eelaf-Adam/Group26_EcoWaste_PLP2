@@ -8,6 +8,7 @@ class ProviderMenu:
         self.user = user
 
     def notify_sold_out(self):
+        """This function informs the provider that one of his listed products is sold out"""
         db = SessionLocal()
         sold_out_listings = db.query(Listing).filter(
             Listing.provider_id == self.user.id,
@@ -22,10 +23,11 @@ class ProviderMenu:
 
     def show(self):
 
+        #Informing provider if one of his products is sold out
         self.notify_sold_out()
 
         """
-         This function displays the provider menu
+        This function displays the provider menu
         when called upon and prompts user to
         select next action
         """
