@@ -152,7 +152,25 @@ DATABASE_URL=mysql+mysqlconnector://{your_username}:{your_password}@localhost:33
 ``` sh
 python main.py
 ```
----
+## 5. For Facilitators/Evaluators
+If you're evaluating this project and don't have access to our Aiven database:
+1. **Copy the environment template:**
+``` sh
+cp .env.example .env
+```
+2. **Update .env with your database credentials:**
+``` env
+DATABASE_URL=mysql+mysqlconnector://your_username:your_password@your_host:3306/your_database_name
+```
+3. **Create the database schema:**
+``` sh
+python table_creation.py
+```
+4. **Reset database if needed(Optional):**
+``` sh
+python reset_db.py
+```
+
 # 👩‍💻 Authors
 - **Leon Nsamba**
 - **Eelaf Adam**
