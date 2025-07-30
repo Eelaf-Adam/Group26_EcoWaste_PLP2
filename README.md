@@ -43,20 +43,38 @@ iii. Install Dependencies
  ```sh
       pip install -r requirements.txt
 ```
-iv. Set Up Environment Variables
 
- ```sh
-      #If you are not using .env file you can skip this step
-      DATABASE_URL=mysql+myconnector://your-db-url
-```
-v. Run the Application
-
- ```sh
-      python main.py
-```
 # 🛠️ DataBase setup 
+##  For Facilitators/Evaluators
+If you're evaluating this project and don't have access to our Aiven database:
+1. **Copy the environment template:**
+``` sh
+cp .env.example .env
+```
+2. **Update .env with your database credentials:**
+``` sh
+nano .env
+```
 
-### 1. Install MySQL Server
+``` env
+DATABASE_URL=mysql+pymysql://<username>:<password>@<host>:<port>/<database>
+```
+3. **Create the database schema:**
+``` sh
+python table_creation.py
+```
+4. **Initialize the database schema:**
+``` sh
+python main.py
+```
+
+5. **Reset database if needed(Optional):**
+``` sh
+python reset_db.py
+```
+
+### ALTERNATIVELY (PROCESS FROM SCRATCH):
+## 1. Install MySQL Server
 - **Windows:** Download and install from [MySQL Downloads]
 - **macOS:** Use Homebrew:
   ```sh
@@ -83,24 +101,6 @@ DATABASE_URL=mysql+mysqlconnector://{your_username}:{your_password}@localhost:33
 ### 4. Initialize the Database Schema
 ``` sh
 python main.py
-```
-## 5. For Facilitators/Evaluators
-If you're evaluating this project and don't have access to our Aiven database:
-1. **Copy the environment template:**
-``` sh
-cp .env.example .env
-```
-2. **Update .env with your database credentials:**
-``` env
-DATABASE_URL=mysql+mysqlconnector://your_username:your_password@your_host:3306/your_database_name
-```
-3. **Create the database schema:**
-``` sh
-python table_creation.py
-```
-4. **Reset database if needed(Optional):**
-``` sh
-python reset_db.py
 ```
 <br>
 
