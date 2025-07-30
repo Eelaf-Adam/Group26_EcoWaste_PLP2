@@ -44,7 +44,7 @@ iii. Install Dependencies
       pip install -r requirements.txt
 ```
 
-# 🛠️ DataBase setup 
+# 🛠️ DataBase Setup 
 ##  For Facilitators/Evaluators
 If you're evaluating this project and don't have access to our Aiven database:
 1. **Copy the environment template:**
@@ -74,7 +74,7 @@ python reset_db.py
 ```
 
 ### ALTERNATIVELY (PROCESS FROM SCRATCH):
-## 1. Install MySQL Server
+1. **Install MySQL Server**
 - **Windows:** Download and install from [MySQL Downloads]
 - **macOS:** Use Homebrew:
   ```sh
@@ -84,7 +84,7 @@ python reset_db.py
   sudo apt update
   sudo apt install mysql-server
 
-### 2. Create the Database
+2. **Create the Database**
 ``` sql
 CREATE DATABASE ecowaste_db;
 ```
@@ -93,12 +93,12 @@ OR
 mysql -u root -p
 ```
 
-### 3. Configure Environment Variables
+3. **Configure Environment Variables**
 ``` env
 DATABASE_URL=mysql+mysqlconnector://{your_username}:{your_password}@localhost:3306/ecowaste_db?ssl-mode=DISABLED
 ```
 
-### 4. Initialize the Database Schema
+4. **Initialize the Database Schema**
 ``` sh
 python main.py
 ```
