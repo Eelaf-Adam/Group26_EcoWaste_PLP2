@@ -54,74 +54,6 @@ v. Run the Application
  ```sh
       python main.py
 ```
-<br>
-
-## 💻 User Journey
-After installing and running the app using 'python main.py', you will interact with it directly in your terminal.
-
-### 1. 📧 Email Prompt
-  You'll be asked to enter your email:
-  - If the email exists, you'll be prompted to log in.
-  - If the email is not found, you can create a new account.
-
----
-
-### 2. 🔐 Sign Up Options
-  - Choose your role:
-     **Buyer**: A company or organization interested in purchasing waste.
-     **Provider**: An individual or organization listing waste items.
-    
-  - Depending on your role, you'll be prompted to enter:
-      - Name / Company Name
-      - Location
-      - Password   
----
-
-### 3. 📋 Logged-In Menus
-
-### 👤 Buyer Menu:
-  - View available waste listings
-  - Purchase listed items
-  - View your purchase history
-
-### 👤 Provider Menu:
-  - Add new recyclable waste listings
-  - View your active listings
-
----
-
-### 4. 🧭 Navigation
-  - All actions are selected through simple number or text-based input in the terminal
-  - You can exit the application at any time using the quit option
----
-
-# Project Structure 
-
-```plaintext
-📁Group26_EcoWaste_PLP2/
-├── 📄main.py               #Contains logic to run the program
-├── 📄requirements.txt      #Contains the requirements to run the file
-├── 📄.env                  #Contains the database URL
-├── 📄reset_db.py           #File run once to reset / clear the database tables
-├── 📄table_creation.py     #File run once to populate database with respective tables
-│
-├── 📁controllers/          #Contains the logic for all user prompts
-│   └── 📄auth.py           #Contains the logic for user account creation
-|   └── 📄buyer_home.py     #Contains the logic for buyer prompts
-|   └── 📄provider_home.py  #Contains the logic for provider prompts
-│
-├── 📁models/
-│   ├── 📄database.py       #Connects the code to the database
-│   └── 📄listings.py       #Creation and specification of requirements for listing table
-|   └── 📄purchases.py      #Creation and specification of requirements for purchases table
-|   └── 📄user.py           #Creation and specification of requirements for user table
-│
-├── 📁utils/
-│   └── 📄security.py       #Connects the functions to hash user passwords on the database
-│
-└── 📄README.md
-```
-
 # 🛠️ DataBase setup 
 
 ### 1. Install MySQL Server
@@ -170,6 +102,73 @@ python table_creation.py
 ``` sh
 python reset_db.py
 ```
+<br>
+
+# Project Structure 
+
+```plaintext
+📁Group26_EcoWaste_PLP2/
+├── 📄main.py               #Contains logic to run the program
+├── 📄requirements.txt      #Contains the requirements to run the file
+├── 📄.env                  #Contains the database URL
+├── 📄reset_db.py           #File run once to reset / clear the database tables
+├── 📄table_creation.py     #File run once to populate database with respective tables
+│
+├── 📁controllers/          #Contains the logic for all user prompts
+│   └── 📄auth.py           #Contains the logic for user account creation
+|   └── 📄buyer_home.py     #Contains the logic for buyer prompts
+|   └── 📄provider_home.py  #Contains the logic for provider prompts
+│
+├── 📁models/
+│   ├── 📄database.py       #Connects the code to the database
+│   └── 📄listings.py       #Creation and specification of requirements for listing table
+|   └── 📄purchases.py      #Creation and specification of requirements for purchases table
+|   └── 📄user.py           #Creation and specification of requirements for user table
+│
+├── 📁utils/
+│   └── 📄security.py       #Connects the functions to hash user passwords on the database
+│
+└── 📄README.md
+```
+## 💻 User Journey
+After installing and running the app using 'python main.py', you will interact with it directly in your terminal.
+
+### 1. 📧 Email Prompt
+  You'll be asked to enter your email:
+  - If the email exists, you'll be prompted to log in.
+  - If the email is not found, you can create a new account.
+
+---
+
+### 2. 🔐 Sign Up Options
+  - Choose your role:
+     **Buyer**: A company or organization interested in purchasing waste.
+     **Provider**: An individual or organization listing waste items.
+    
+  - Depending on your role, you'll be prompted to enter:
+      - Name / Company Name
+      - Location
+      - Password   
+---
+
+### 3. 📋 Logged-In Menus
+
+### 👤 Buyer Menu:
+  - View available waste listings
+  - Purchase listed items
+  - View your purchase history
+
+### 👤 Provider Menu:
+  - Add new recyclable waste listings
+  - View your active listings
+
+---
+
+### 4. 🧭 Navigation
+  - All actions are selected through simple number or text-based input in the terminal
+  - You can exit the application at any time using the quit option
+---
+
 
 # 👩‍💻 Authors
 - **Leon Nsamba**
