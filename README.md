@@ -129,6 +129,7 @@ python main.py
 │   └── 📄security.py       #Connects the functions to hash user passwords on the database
 │
 └── 📄README.md
+|__ 📄LICENSE
 ```
 ## 💻 User Journey
 After installing and running the app using 'python main.py', you will interact with it directly in your terminal.
